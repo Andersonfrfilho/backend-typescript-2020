@@ -21,9 +21,9 @@ services:
       context: .
       dockerfile: Backend.Dockerfile
     # image: backend-typescript
-    command: npm run dev:server
+    # command: 
     volumes:
-      - . :/app
+      - . :/usr/app
     depends_on: 
       - postgres-db
     links:

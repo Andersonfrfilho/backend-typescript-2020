@@ -6,12 +6,14 @@ WORKDIR /usr/app
 COPY package*.json /usr/app
 # rode o comando npm install
 RUN npm install
+# RUN pwd
+# RUN ls -la
 # # copia o src depois . <- tudoq ue esta na pasta . <- diretorio do workdir
-COPY . .
+# COPY . .
 # # liberar a ´porta 1º porta do computador / porta do docker
 # EXPOSE 3333
 # # CMD comandos que serão rodados
-# CMD ["npm","run","./src/server.ts"]
+CMD ["npm","run","dev:server"]
 # para montar a imagem rodar o comando docker build -t image-docker-backend-typescript .
 
 

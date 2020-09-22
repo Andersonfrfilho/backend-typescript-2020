@@ -8,7 +8,7 @@ const usersRepository = new UsersRepository();
 usersRouter.get('/', (request, response) => {
   const users = usersRepository.all();
 
-  return response.json({api:'sdfas'});
+  return response.json({api:false});
 });
 
 usersRouter.post('/', (request, response) => {
