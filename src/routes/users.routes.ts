@@ -8,7 +8,7 @@ const usersRepository = new UsersRepository();
 usersRouter.get('/', (request, response) => {
   const users = usersRepository.all();
 
-  return response.json(users);
+  return response.json({api:'sdfas'});
 });
 
 usersRouter.post('/', (request, response) => {
@@ -18,7 +18,7 @@ usersRouter.post('/', (request, response) => {
     const user = createUser.execute({ name, email, password, type });
     return response.json(user);
   } catch (err) {
-    return response.status(400).json({ error: 'error message' });
+    return response.status(400).json({ error: 'error ss' });
   }
 });
 
