@@ -1,33 +1,33 @@
-version: "3.8"
+version: "3"
 
 services:
-  postgres-db:
-    container_name: postgres-db
-    image: postgres
-    environment: 
-      POSTGRES_PASSWORD: 102030
-      POSTGRES_USER : postgres
-      POSTGRES_DB : application_db
-    volumes:
-      - ./pgdata:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
+  # postgres-db:
+  #   container_name: postgres-db
+  #   image: postgres
+  #   environment: 
+  #     POSTGRES_PASSWORD: 102030
+  #     POSTGRES_USER : postgres
+  #     POSTGRES_DB : application_db
+  #   volumes:
+  #     - ./pgdata:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
 
   backend-app:
     # restart: always
-    working_dir: /usr/app
+    # working_dir: /usr/app
     build:
       context: .
       dockerfile: Backend.Dockerfile
     container_name: backend-api
     # image: backend-typescript
-    command: npm run dev:server
+    command: npm run dev:nodemon
     volumes:
-      - ./src:/src
-    depends_on: 
-      - postgres-db
-    links:
-      - postgres-db
+      - .:/usr/app
+    # depends_on: 
+    #   - postgres-db
+    # links:
+    #   - postgres-db
     ports:
     - "3333:3333"
     - "8181:8181"

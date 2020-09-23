@@ -11,9 +11,9 @@ RUN npm install
 # # copia o src depois . <- tudoq ue esta na pasta . <- diretorio do workdir
 COPY . .
 # # liberar a ´porta 1º porta do computador / porta do docker
-# EXPOSE 3333
+EXPOSE 3333
 # # CMD comandos que serão rodados
-# CMD ["npm","run","dev:server"]
+# CMD ["npm","run","dev:nodemon"]
 # para montar a imagem rodar o comando docker build -t image-docker-backend-typescript .
 
 
