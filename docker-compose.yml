@@ -13,20 +13,21 @@ services:
     ports:
       - "5432:5432"
 
-  backend:
-    container_name: backend-api
+  backend-app:
     # restart: always
-    # working_dir: 
+    working_dir: /usr/app
     build:
       context: .
       dockerfile: Backend.Dockerfile
+    container_name: backend-api
     # image: backend-typescript
-    # command: 
+    command: npm run dev:server
     volumes:
-      - . :/usr/app
+      - ./src:/src
     depends_on: 
       - postgres-db
     links:
       - postgres-db
     ports:
     - "3333:3333"
+    - "8181:8181"
