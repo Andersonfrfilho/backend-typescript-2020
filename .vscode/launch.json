@@ -9,7 +9,7 @@
       "request": "attach",
       "name": "Docker ts-node",
       "address": "localhost",
-      "port": 8181,
+      "port": 9333,
       "localRoot": "${workspaceFolder}",
       "remoteRoot": "/app",
       "protocol": "inspector"

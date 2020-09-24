@@ -1,21 +1,34 @@
 version: '3'
 services: 
+  postgres-db:
+    container_name: postgres-db
+    image: postgres
+    environment: 
+      POSTGRES_PASSWORD: 102030
+      POSTGRES_USER : postgres
+      POSTGRES_DB : application_db
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+      
   backend-api:
     working_dir: /usr/app
     container_name: backend-api
-    # image: node:10
     build:
       context: .
       dockerfile: Backend.Dockerfile
     image: backend-image
-    # container_name: backend-api
+
     command: sh -c "cd /urs/app && npm run dev:server"
     volumes:
       - .:/urs/app
     # env_file: 
     #   - vanessa-api.env
+    depends_on: 
+      - postgres-db
+    links:
+      - postgres-db
     ports:
       - '3333:3333'
-    # depends_on:
-    #   - mongo-db
-    #   - redis
+      - '9333:9333'
