@@ -1,4 +1,7 @@
 version: '3'
+networks:
+  network-services-connector:
+      driver: bridge
 services: 
   postgres-db:
     container_name: postgres-db
@@ -11,6 +14,8 @@ services:
       - ./pgdata:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    networks:
+      - network-services-connector
       
   backend-api:
     working_dir: /usr/app
@@ -27,8 +32,10 @@ services:
     #   - vanessa-api.env
     depends_on: 
       - postgres-db
-    links:
-      - postgres-db
+    # links:
+    #   - postgres-db
     ports:
       - '3333:3333'
       - '9333:9333'
+    networks:
+      - network-services-connector
