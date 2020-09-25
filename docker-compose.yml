@@ -1,7 +1,7 @@
 version: '3'
 networks:
   network-services-connector:
-      driver: bridge
+    driver: bridge
 services: 
   postgres-db:
     container_name: postgres-db
@@ -26,6 +26,8 @@ services:
     image: backend-image
 
     command: sh -c "cd /urs/app && npm run dev:server"
+    environment:
+      DB_HOST: postgres-db
     volumes:
       - .:/urs/app
     # env_file: 

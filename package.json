@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "dev:nodemon": "nodemon --legacy-watch src/server.js",
-    "dev:server": "ts-node-dev --inspect=0.0.0.0:9333 --poll --respawn --transpile-only --ignore-watch node_modules src/server.ts"
+    "dev:server": "ts-node-dev --inspect=0.0.0.0:9333 --poll --respawn --transpile-only --ignore-watch node_modules src/server.ts",
+    "typeorm":"ts-node-dev ./node_modules/typeorm/cli.js"
   },
   "dependencies": {
     "date-fns": "^2.16.1",

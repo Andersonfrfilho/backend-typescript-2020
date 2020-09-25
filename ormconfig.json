@@ -1,8 +1,0 @@
-{
-  "type":"postgres",
-  "host":"postgres-db",
-  "port":5432,
-  "username":"postgres",
-  "password":"102030",
-  "database":"application_db"
-}
