@@ -1,3 +1,4 @@
+import { getCustomRepository } from 'typeorm';
 import User, { ETypeUser } from '../models/User';
 import UsersRepository from '../repositories/UsersRepository';
 
@@ -9,18 +10,28 @@ interface Request {
 }
 
 class CreateUserService {
-  private usersRepository: UsersRepository;
+  public async execute({
+    name,
+    email,
+    password,
+    type,
+  }: Request): Promise<User> {
+    const usersRepository = getCustomRepository(UsersRepository);
+    const userEmailExist = await usersRepository.findByEmail(email);
 
-  constructor(usersRepository: UsersRepository) {
-    this.usersRepository = usersRepository;
-  }
-
-  public execute({ name, email, password, type }: Request): User {
-    const userEmailExist = this.usersRepository.findByEmail(email);
     if (userEmailExist) {
-      throw Error('This appointment is already booked');
+      throw Error('This user is already exist');
     }
-    const user = this.usersRepository.create({ name, email, password, type });
+    const userCreated = usersRepository.create({
+      name,
+      email,
+      password_hash: password,
+      type,
+    });
+    console.log(userCreated);
+    console.log(userEmailExist);
+    console.log(name, email, password, type);
+    const user = await usersRepository.save(userCreated);
     return user;
   }
 }

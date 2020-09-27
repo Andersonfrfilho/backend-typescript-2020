@@ -1,27 +1,24 @@
-import { v4 as uuidv4 } from 'uuid';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 enum ETypeUser {
   client = 'CLIENT',
   admin = 'ADMIN',
 }
-
+@Entity('users')
 class User {
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Column()
   name: string;
 
+  @Column()
   email: string;
 
-  password: string;
+  @Column()
+  password_hash: string;
 
-  type: ETypeUser;
-
-  constructor({ name, email, password, type }: Omit<User, 'id'>) {
-    this.id = uuidv4();
-    this.name = name;
-    this.email = email;
-    this.password = password;
-    this.type = type;
-  }
+  @Column()
+  type: string;
 }
 export { User as default, ETypeUser };

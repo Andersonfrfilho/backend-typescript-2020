@@ -5,6 +5,9 @@ module.exports = {
   username: process.env.DB_USER || 'postgres',
   password:process.env.DB_PASSWORD || '102030',
   database: process.env.DB_NAME || 'application_db',
+  entities: [
+    './src/models/*.ts',
+  ],
   migrations: [
     './src/database/migrations/*.ts',
   ],

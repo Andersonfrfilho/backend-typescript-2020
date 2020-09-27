@@ -27,7 +27,10 @@
         "ts": "never"
       }
     ],
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "no-shadow": "off",
+    "camelcase":"off"
+    // "@typescript-eslint/no-shadow": ["error"]
   },
   "settings": {
     "import/resolver": {

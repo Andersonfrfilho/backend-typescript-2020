@@ -1,24 +1,25 @@
-import { request, response, Router } from 'express';
+import { Router } from 'express';
+import { getCustomRepository } from 'typeorm';
 import UsersRepository from '../repositories/UsersRepository';
 import CreateUserSevice from '../service/CreateUserService';
 
 const usersRouter = Router();
-const usersRepository = new UsersRepository();
 
-usersRouter.get('/', (request, response) => {
-  const users = usersRepository.all();
+usersRouter.get('/', async (request, response) => {
+  const usersRepository = getCustomRepository(UsersRepository);
+  const users = await usersRepository.find();
 
-  return response.json({api:true});
+  return response.json(users);
 });
 
-usersRouter.post('/', (request, response) => {
+usersRouter.post('/', async (request, response) => {
   try {
     const { name, email, password, type } = request.body;
-    const createUser = new CreateUserSevice(usersRepository);
-    const user = createUser.execute({ name, email, password, type });
+    const createUser = new CreateUserSevice();
+    const user = await createUser.execute({ name, email, password, type });
     return response.json(user);
   } catch (err) {
-    return response.status(400).json({ error: 'error ss' });
+    return response.status(400).json(err);
   }
 });
 
