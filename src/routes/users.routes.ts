@@ -19,7 +19,7 @@ usersRouter.post('/', async (request, response) => {
     const user = await createUser.execute({ name, email, password, type });
     return response.json(user);
   } catch (err) {
-    return response.status(400).json(err);
+    return response.status(400).json({ error: err.message });
   }
 });
 
