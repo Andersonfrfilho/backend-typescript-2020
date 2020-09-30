@@ -28,9 +28,6 @@ class CreateUserService {
       password_hash: password,
       type,
     });
-    console.log(userCreated);
-    console.log(userEmailExist);
-    console.log(name, email, password, type);
     const user = await usersRepository.save(userCreated);
     return user;
   }
