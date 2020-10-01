@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export default class CreateImages1601227612989 implements MigrationInterface {
+export default class CreateProfile1601520049745 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'images',
+        name: 'office',
         columns: [
           {
             name: 'id',
@@ -14,9 +14,9 @@ export default class CreateImages1601227612989 implements MigrationInterface {
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'link',
+            name: 'name',
             type: 'varchar',
-            isNullable: true,
+            isNullable: false,
           },
           {
             name: 'created_at',
@@ -34,6 +34,6 @@ export default class CreateImages1601227612989 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('images');
+    await queryRunner.dropTable('office');
   }
 }

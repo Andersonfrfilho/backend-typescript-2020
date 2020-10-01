@@ -16,6 +16,7 @@ export default class CreatePosts1601227647243 implements MigrationInterface {
           {
             name: 'content',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'published',

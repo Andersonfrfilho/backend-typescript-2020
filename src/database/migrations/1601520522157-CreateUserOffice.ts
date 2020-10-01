@@ -5,11 +5,12 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export default class CreateUsers1600997208366 implements MigrationInterface {
+export default class CreateUserOffice1601520522157
+  implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'users',
+        name: 'user_office',
         columns: [
           {
             name: 'id',
@@ -19,30 +20,14 @@ export default class CreateUsers1600997208366 implements MigrationInterface {
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'name',
-            type: 'varchar',
-            isNullable: false,
-          },
-          {
-            name: 'email',
-            type: 'varchar',
-            isNullable: false,
-            isUnique: true,
-          },
-          {
-            name: 'password_hash',
-            type: 'varchar',
-            isNullable: false,
-          },
-          {
-            name: 'type',
-            type: 'varchar',
-            isNullable: true,
-          },
-          {
-            name: 'image_id',
+            name: 'user_id',
             type: 'uuid',
-            isNullable: true,
+            isNullable: false,
+          },
+          {
+            name: 'office_id',
+            type: 'uuid',
+            isNullable: false,
           },
           {
             name: 'created_at',
@@ -58,16 +43,30 @@ export default class CreateUsers1600997208366 implements MigrationInterface {
       }),
     );
     await queryRunner.createForeignKey(
-      'images',
+      'user_office',
       new TableForeignKey({
-        columnNames: ['image_id'],
+        name: 'userOffice',
+        columnNames: ['user_id'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'images',
+        referencedTableName: 'users',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+      }),
+    );
+    await queryRunner.createForeignKey(
+      'user_office',
+      new TableForeignKey({
+        name: 'OfficeUser',
+        columnNames: ['office_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'offices',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
       }),
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('users');
+    await queryRunner.dropTable('user_office');
   }
 }

@@ -1,22 +1,25 @@
 import {
+  Entity,
+  PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
-  Entity,
-  JoinTable,
-  ManyToMany,
-  OneToOne,
-  PrimaryGeneratedColumn,
   UpdateDateColumn,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 import User from './User';
 
-@Entity('images')
-class Image {
+@Entity('offices')
+class Office {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
-  link: string;
+  name: string;
+
+  @ManyToMany(type => User)
+  @JoinTable()
+  users: User[];
 
   @CreateDateColumn()
   created_at: Date;
@@ -24,4 +27,4 @@ class Image {
   @UpdateDateColumn()
   updated_at: Date;
 }
-export default Image;
+export default Office;

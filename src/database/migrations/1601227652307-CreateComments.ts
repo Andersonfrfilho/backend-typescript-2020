@@ -1,4 +1,9 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import {
+  MigrationInterface,
+  QueryRunner,
+  Table,
+  TableForeignKey,
+} from 'typeorm';
 
 export default class CreateComments1601227652307 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -16,21 +21,20 @@ export default class CreateComments1601227652307 implements MigrationInterface {
           {
             name: 'content',
             type: 'varchar',
-          },
-          {
-            name: 'author_id',
-            type: 'varchar',
-            default: false,
-          },
-          {
-            name: 'post_id',
-            type: 'varchar',
-            default: false,
+            isNullable: true,
           },
           {
             name: 'published',
             type: 'boolean',
             default: false,
+          },
+          {
+            name: 'author_id',
+            type: 'uuid',
+          },
+          {
+            name: 'post_id',
+            type: 'uuid',
           },
           {
             name: 'created_at',
@@ -45,6 +49,24 @@ export default class CreateComments1601227652307 implements MigrationInterface {
         ],
       }),
     );
+    await queryRunner.createForeignKeys('comments', [
+      new TableForeignKey({
+        name: 'authorComment',
+        columnNames: ['author_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'users',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+      }),
+      new TableForeignKey({
+        name: 'postComment',
+        columnNames: ['post_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'posts',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+      }),
+    ]);
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {

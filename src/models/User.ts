@@ -4,7 +4,15 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToOne,
+  ManyToOne,
+  JoinColumn,
+  ManyToMany,
 } from 'typeorm';
+import Office from './Office';
+import Post from './Post';
+import Comment from './Comment';
+import Image from './Image';
 
 enum ETypeUser {
   client = 'CLIENT',
@@ -26,6 +34,19 @@ class User {
 
   @Column()
   type: string;
+
+  @ManyToOne(() => Post)
+  posts: Post[];
+
+  @ManyToOne(() => Comment)
+  comments: Comment[];
+
+  @OneToOne(type => Image)
+  @JoinColumn()
+  photo: Image;
+
+  @ManyToMany(type => Office, office => office.users)
+  offices: User[];
 
   @CreateDateColumn()
   created_at: Date;
