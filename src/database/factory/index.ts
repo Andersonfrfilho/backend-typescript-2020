@@ -1,3 +1,4 @@
-import users from './user.seed';
+import user from './user';
+import image from './image';
 
-export { users };
+export { image, user };
