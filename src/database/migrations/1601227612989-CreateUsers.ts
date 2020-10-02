@@ -5,7 +5,7 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export default class CreateUsers1600997208366 implements MigrationInterface {
+export default class CreateUsers1601227612989 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
@@ -58,7 +58,7 @@ export default class CreateUsers1600997208366 implements MigrationInterface {
       }),
     );
     await queryRunner.createForeignKey(
-      'images',
+      'users',
       new TableForeignKey({
         columnNames: ['image_id'],
         referencedColumnNames: ['id'],

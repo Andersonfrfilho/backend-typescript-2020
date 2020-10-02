@@ -8,6 +8,8 @@ import {
   ManyToOne,
   JoinColumn,
   ManyToMany,
+  OneToMany,
+  JoinTable,
 } from 'typeorm';
 import Office from './Office';
 import Post from './Post';
@@ -35,23 +37,27 @@ class User {
   @Column()
   type: string;
 
-  @ManyToOne(() => Post)
-  posts: Post[];
+  @Column()
+  image_id: string;
 
-  @ManyToOne(() => Comment)
-  comments: Comment[];
-
-  @OneToOne(type => Image)
-  @JoinColumn()
+  @OneToOne(() => Image)
+  @JoinColumn({ name: 'image_id' })
   photo: Image;
 
-  @ManyToMany(type => Office, office => office.users)
-  offices: User[];
+  @ManyToMany(() => Office)
+  @JoinTable()
+  offices: Office[];
 
   @CreateDateColumn()
   created_at: Date;
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @OneToMany(() => Post, post => post.author)
+  posts: Post[];
+
+  @OneToMany(() => Comment, comment => comment.post)
+  comments: Comment[];
 }
 export { User as default, ETypeUser };
