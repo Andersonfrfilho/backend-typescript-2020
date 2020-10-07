@@ -12,7 +12,7 @@ export default class UserWithOffices1602036737479
     const relationshipUsersOffices = Array.from({ length: 5 }, () => {
       return Array.from(
         { length: Math.floor(Math.random() * offices.length) },
-        () => offices[Math.floor(Math.random() * users.length)],
+        () => offices[Math.floor(Math.random() * offices.length)],
       );
     });
     const promiseForSaveRelationship = relationshipUsersOffices.map(

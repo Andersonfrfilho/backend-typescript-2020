@@ -44,8 +44,18 @@ class User {
   @JoinColumn({ name: 'image_id' })
   photo?: Image;
 
+  @OneToMany(() => Post, post => post.author)
+  posts?: Post[];
+
+  @OneToMany(() => Comment, comment => comment.author)
+  comments?: Comment[];
+
   @ManyToMany(() => Office)
-  @JoinTable()
+  @JoinTable({
+    name: 'user_office',
+    joinColumn: { name: 'user_id' },
+    inverseJoinColumn: { name: 'office_id' },
+  })
   offices?: Office[];
 
   @CreateDateColumn()
@@ -53,11 +63,5 @@ class User {
 
   @UpdateDateColumn()
   updated_at?: Date;
-
-  @OneToMany(() => Post, post => post)
-  posts?: Post[];
-
-  @OneToMany(() => Comment, comment => comment.post)
-  comments?: Comment[];
 }
 export { User as default, ETypeUser };
