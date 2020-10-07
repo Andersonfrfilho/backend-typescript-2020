@@ -38,26 +38,26 @@ class User {
   type: string;
 
   @Column()
-  image_id: string;
+  image_id?: string;
 
   @OneToOne(() => Image)
   @JoinColumn({ name: 'image_id' })
-  photo: Image;
+  photo?: Image;
 
   @ManyToMany(() => Office)
   @JoinTable()
-  offices: Office[];
+  offices?: Office[];
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at?: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updated_at?: Date;
 
-  @OneToMany(() => Post, post => post.author)
-  posts: Post[];
+  @OneToMany(() => Post, post => post)
+  posts?: Post[];
 
   @OneToMany(() => Comment, comment => comment.post)
-  comments: Comment[];
+  comments?: Comment[];
 }
 export { User as default, ETypeUser };

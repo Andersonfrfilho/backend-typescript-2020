@@ -13,7 +13,6 @@ export default class AlterPostsUsers1601515664212
       new TableColumn({
         name: 'author_id',
         type: 'uuid',
-        isNullable: true,
       }),
     );
     await queryRunner.createForeignKey(

@@ -1,42 +1,20 @@
 import { getCustomRepository } from 'typeorm';
-import User, { ETypeUser } from '../models/User';
 import Image from '../models/Image';
-import UsersRepository from '../repositories/UsersRepository';
 import ImagesRepository from '../repositories/ImagesRepository';
 
 interface Request {
-  name: string;
-  email: string;
-  password: string;
-  type: ETypeUser;
+  link: string;
 }
 
-class CreateUserService {
-  public async execute({
-    name,
-    email,
-    password,
-    type,
-  }: Request): Promise<User | null> {
-    const usersRepository = getCustomRepository(UsersRepository);
+class CreateImageService {
+  public async execute({ link }: Request): Promise<Image> {
     const imagesRepository = getCustomRepository(ImagesRepository);
-    // const userEmailExist = await usersRepository.findByEmail(email);
+
     const imageCreated = imagesRepository.create({
-      link: 'ijuhasd;',
+      link,
     });
-    console.log('uhul');
-    await imagesRepository.save(imageCreated);
-    // if (userEmailExist) {
-    //   throw new Error('This user is already exist');
-    // }
-    // const userCreated = usersRepository.create({
-    //   name,
-    //   email,
-    //   password_hash: password,
-    //   type,
-    // });
-    // const user = await usersRepository.save(userCreated);
-    return user || null;
+    const image = await imagesRepository.save(imageCreated);
+    return image;
   }
 }
-export default CreateUserService;
+export default CreateImageService;

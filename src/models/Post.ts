@@ -4,14 +4,15 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import User from './User';
 import Comment from './Comment';
 
-@Entity('images')
-class Image {
+@Entity('posts')
+class Post {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -22,19 +23,19 @@ class Image {
   published: boolean;
 
   @Column()
-  author_id: string;
+  author_id?: string;
 
   @ManyToOne(() => User)
   @JoinColumn({ name: 'author_id' })
-  author: User;
+  author?: User;
 
-  @ManyToOne(() => Comment)
-  comments: Comment[];
+  @OneToMany(() => Comment, comment => comment.post)
+  comments?: Comment[];
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at?: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updated_at?: Date;
 }
-export default Image;
+export default Post;

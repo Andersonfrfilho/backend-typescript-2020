@@ -63,6 +63,8 @@ export default class CreateUsers1601227612989 implements MigrationInterface {
         columnNames: ['image_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'images',
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
       }),
     );
   }

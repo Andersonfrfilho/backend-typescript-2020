@@ -10,8 +10,8 @@ import {
 import User from './User';
 import Post from './Post';
 
-@Entity('images')
-class Image {
+@Entity('comments')
+class Comment {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -29,16 +29,16 @@ class Image {
 
   @ManyToOne(() => User)
   @JoinColumn({ name: 'author_id' })
-  author: User;
+  author?: User;
 
   @ManyToOne(() => Post)
   @JoinColumn({ name: 'post_id' })
-  post: User;
+  post?: Post;
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at?: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updated_at?: Date;
 }
-export default Image;
+export default Comment;

@@ -19,12 +19,12 @@ class Office {
 
   @ManyToMany(type => User)
   @JoinTable()
-  users: User[];
+  users?: User[];
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at?: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updated_at?: Date;
 }
 export default Office;
