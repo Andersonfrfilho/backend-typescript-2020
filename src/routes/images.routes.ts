@@ -13,14 +13,10 @@ imagesRouter.get('/', async (request, response) => {
 });
 
 imagesRouter.post('/', async (request, response) => {
-  try {
-    const { link } = request.body;
-    const imageCreate = new CreateImageService();
-    const image = await imageCreate.execute({ link });
-    return response.json(image);
-  } catch (err) {
-    return response.status(400).json({ error: err.message });
-  }
+  const { link } = request.body;
+  const imageCreate = new CreateImageService();
+  const image = await imageCreate.execute({ link });
+  return response.json(image);
 });
 
 export default imagesRouter;

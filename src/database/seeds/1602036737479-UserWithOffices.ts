@@ -25,6 +25,6 @@ export default class UserWithOffices1602036737479
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    // await getConnection('seed').getRepository('user_office').delete({});
+    await getConnection('seed').getRepository('user_office').delete({});
   }
 }

@@ -1,2 +1,4 @@
 node_modules/
 pgdata/
+temp/*
+!temp/.gitkeep
