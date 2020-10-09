@@ -6,10 +6,10 @@ module.exports = [
     username: process.env.DB_USER || 'postgres',
     password: process.env.DB_PASSWORD || '102030',
     database: process.env.DB_NAME || 'application_db',
-    entities: ['./src/models/*.ts'],
-    migrations: ['./src/database/migrations/*.ts'],
+    entities: ['./src/modules/**/infra/typeorm/entities/*.ts'],
+    migrations: ['./src/shared/infra/typeorm/migrations/*.ts'],
     cli: {
-      migrationsDir: './src/database/migrations',
+      migrationsDir: './src/shared/infra/typeorm/migrations',
     },
   },
   {
@@ -20,10 +20,10 @@ module.exports = [
     username: process.env.DB_USER || 'postgres',
     password: process.env.DB_PASSWORD || '102030',
     database: process.env.DB_NAME || 'application_db',
-    entities: ['./src/models/*.ts'],
-    migrations: ['./src/database/seeds/*.ts'],
+    entities: ['./src/modules/**/infra/typeorm/entities/*.ts'],
+    migrations: ['./src/shared/infra/typeorm/seeds/*.ts'],
     cli: {
-      migrationsDir: './src/database/seeds',
+      migrationsDir: './src/shared/infra/typeorm/seeds',
     },
   },
 ];

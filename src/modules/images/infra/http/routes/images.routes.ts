@@ -4,17 +4,17 @@ import CreateImageService from '@modules/images/services/CreateImageService';
 import ensureAuthenticated from '@shared/infra/http/middlewares/ensureAuthenticated';
 
 const imagesRouter = Router();
-const imagesRepository = new ImagesRepository();
 
 imagesRouter.use(ensureAuthenticated);
 
 // imagesRouter.get('/', async (request, response) => {
-//   const images = await imagesRepository.find();
-
-//   return response.json(images);
-// });
-
+  //   const images = await imagesRepository.find();
+  
+  //   return response.json(images);
+  // });
+  
 imagesRouter.post('/', async (request, response) => {
+  const imagesRepository = new ImagesRepository();
   const { link } = request.body;
   const imageCreate = new CreateImageService(imagesRepository);
   const image = await imageCreate.execute({ link });
