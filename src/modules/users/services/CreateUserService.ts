@@ -1,18 +1,19 @@
-import { getCustomRepository } from 'typeorm';
+import { injectable, inject } from 'tsyringe'
 import { hash } from 'bcryptjs';
 import User, { ETypeUser } from '@modules/users/infra/typeorm/entities/User';
 import AppError from '@shared/errors/AppError';
-import UsersRepository from '@modules/users/repositories/UsersRepository';
-import IUsersRepository from '@modules/users/repositories/IUserRepository'
+import IUsersRepository from '@modules/users/repositories/IUsersRepository'
 interface IRequest {
   name: string;
   email: string;
   password: string;
   type: ETypeUser;
 }
-
+@injectable()
 class CreateUserService {
-  constructor(private usersRepository: IUsersRepository){}
+  constructor(
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository){}
   public async execute({
     name,
     email,
